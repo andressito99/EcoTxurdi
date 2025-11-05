@@ -36,7 +36,7 @@ try {
 }
 
 // Constantes del proyecto
-define('BASE_URL', '/G4_KAIXOMUNDUA');
+define('BASE_URL', '/Ecotxurdi');
 define('BASE_PATH', __DIR__);
 
 // Generar token aleatorio
@@ -81,4 +81,5 @@ if (!isset($_SESSION['id_usuario']) && isset($_COOKIE['tokenMantenerSesion'])) {
         ]);
     }
 }
+
 ?>
