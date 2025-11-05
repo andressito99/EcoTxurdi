@@ -21,7 +21,7 @@ Proyecto PHP sencillo sobre proteccion al medio ambiente siguiento la ods numero
 
 1. Clona o copia este repositorio a la carpeta de www de Laragon o xamp (O en la tu servidor), p. ej:
 
-   c:\laragon\www\G4_KaixoMundua
+   c:\laragon\www\Ecotxurdi
 
 2. Importa la base de datos. En phpMyAdmin o usando la consola MySQL, importa `EcoTxurdi.sql` (está en la raíz del proyecto).
 
@@ -34,7 +34,7 @@ Proyecto PHP sencillo sobre proteccion al medio ambiente siguiento la ods numero
 
 4. Arranca Laragon o Xamp (o tu servidor). Accede en el navegador a:
 
-   http://localhost/G4_KaixoMundua/
+   http://localhost/Ecotxurdi/
 
 5. Regístrate o usa una cuenta de admin si está disponible para probar el panel (Puedes Econtrar Los Usuarios de Prueba en el SQL).
 
@@ -49,7 +49,7 @@ La aplicación usa una constante `BASE_URL` definida en `config.php` para constr
 
 ```php
 // Constantes del proyecto
-define('BASE_URL', '/G4_KAIXOMUNDUA');
+define('BASE_URL', '/Ecotxurdi');
 define('BASE_PATH', __DIR__);
 ```
 
@@ -231,3 +231,4 @@ Para dudas o soporte, puedes escribirnos
 ---
 
 # Ecotxurdi
+
