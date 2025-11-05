@@ -1,0 +1,1053 @@
+/* ========================================================================
+   EcoMisiones Stylesheet
+   Autores: [G4]
+   Descripcion: Estilos globales, componentes, layout y responsive design
+   ======================================================================== */
+
+
+/* ========================================================================
+   1. VARIABLES GLOBALES
+   ======================================================================== */
+:root{
+  --bg:#245f54; /* color de fondo principal */
+  --bg-2:#2e6b60; /* color secundario de fondo */
+  --nav:#7fa79f; /* color de la barra de navegación */
+  --panel:#86a9a1; /* color de paneles */
+  --panel-2:#8eb2aa; /* color alternativo de panel */
+  --darkGreen: #1f3d37; /* verde oscuro */
+  --darkBlue:#1b2143; /* azul oscuro */
+  --colorBase:#EBE9D6; /* color base claro */
+  --gray: #6b7b77; /* gris neutro */
+  --card:#6fa394; /* color para tarjetas */
+  --muted:#d6e3df; /* color apagado para fondos o textos secundarios */
+  --white:#ffffff; /* blanco */
+  --text:#f4fbf9; /* color principal del texto */
+  --error:red; /* color para errores */
+  --accent:#244f46; /* color de acento para botones o destacados */
+  --pill:#2b6b5f; /* color para elementos tipo pill */
+  --shadow: 0 8px 24px rgba(0,0,0,.25); /* sombra para cajas */
+  
+  /*-== Bordes ==- */
+  --radius-xl: 26px; /* borde redondeado grande */
+  --radius-lg: 20px; /* borde redondeado mediano */
+  --radius: 14px; /* borde redondeado base */
+  
+
+  /*-== Tipografía ==- */
+  --fuentePrincipal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* fuente principal */
+  --fuenteTamanoSm: 14px;
+  --fuenteTamanoBase: 18px;
+  --fuenteTamanoLg: 22px;
+  --fuenteTamanoXl: 28px;
+  --fuenteTamano2Xl: 32px;
+  --fuenteTamano3Xl: 36px;
+  --fuenteTamano4Xl: 48px;
+}
+
+/* ========================================================================
+   2. RESET & BASE
+   ======================================================================== */
+*{box-sizing:border-box}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos base del body */
+body {
+  position: relative;
+  color: var(--text); /* texto principal */
+  font-family: var(--fuentePrincipal); /* fuente principal */
+  line-height: 1.5;
+  background: none; /* eliminamos fondo por defecto */
+}
+
+/* Clase de error para textos */
+.error {
+  color: var(--error);
+}
+
+/* Fondo difuminado detrás de todo el contenido */
+body::before {
+  content: "";
+  position: fixed; /* siempre fijo al viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(./img/fondo.png); /* imagen de fondo */
+  background-size: cover; /* cubrir todo el área */
+  background-position: center;
+  filter: blur(8px); /* difuminar la imagen */
+  z-index: -1; /* colocarlo detrás de todo */
+}
+
+/* Enlaces base sin subrayado y heredan color */
+a{color:inherit;text-decoration:none}
+a:focus, button:focus, input:focus, select:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+/* Contenedor principal con ancho máximo y centrado */
+.container{width:min(1100px, 94%); margin:0 auto}
+
+/* ========================================================================
+   3. HEADER & NAVEGACIÓN
+   ======================================================================== */
+header.topbar{
+  position:relative;
+  background:var(--nav);
+  border-radius:20px;
+  margin:20px auto 26px;
+  /* limitar ancho máximo y evitar ocupar todo el viewport en móviles */
+  max-width:1100px; /* ancho máximo fijo */
+  width: min(1100px, 94%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 22px;
+  gap:12px;
+}
+
+/* Branding: logo y nombre */
+.brand{
+  display:flex; align-items:center; gap:12px;
+}
+.brand .logo a{
+  width:84px; height:84px; 
+  border-radius:50%; /* logo circular */
+  background:var(--panel);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--darkGreen); font-weight:700;
+  box-shadow:var(--shadow);
+}
+
+/* Imagen del logo */
+.logo img{
+  width: 100%;
+}
+
+/* Navegación de links principales */
+nav.links{
+  display:flex; align-items:center; gap:28px;
+  margin-left:8px;
+  flex:1; /* ocupa espacio restante */
+}
+nav.links a{
+  font-weight:800;
+  font-size:var(--fuenteTamanoLg);
+  font-family: var(--fuentePrincipal);
+  letter-spacing:.3px;
+  opacity:.95;
+}
+nav.links a:hover{
+  color: var(--bg);
+}
+nav.links a.active{ text-decoration:underline; text-underline-offset:6px }
+
+/* Puntos de usuario en el header */
+nav.puntosUsuario{
+  font-family: var(--fuentePrincipal);
+  font-size: var(--fuenteTamanoBase);
+  font-weight: bold;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  margin-right: 2%;
+}
+
+/* Botones de la derecha */
+.right-btn a{
+  background:var(--accent);
+  padding:10px 26px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:var(--fuenteTamanoLg);
+}
+.right-btn{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+/* Dropdown (menú desplegable) */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: var(--accent);
+  color: var(--white);
+  padding: 10px 26px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: var(--fuenteTamanoSm);
+}
+.dropbtn:hover {
+  background: var(--bg);
+}
+.dropdown-content {
+  display: none;
+  position: absolute; /* debajo del botón */
+  top: 100%; /* justo debajo */
+  flex-direction: column;
+  margin-top: 6px;
+  right: 0;
+  background-color: var(--accent);
+  min-width: 180px;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius-lg);
+  z-index: 99;
+  overflow: hidden;
+}
+.dropdown-content a {
+  color: var(--white);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+  border-radius: 0;
+  font-size: var(--fuenteTamanoBase);
+}
+.dropdown-content a:hover {
+  background-color: var(--bg-2);
+}
+/* Clase para mostrar dropdown */
+.show {
+  display: block;
+}
+
+/* Selector de idioma */
+#langSwitcher{
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--bg);
+  font-family: var(--fuentePrincipal);
+  color: var(--white);
+}
+
+/* ===== Mobile menu toggle button ===== */
+.menu-toggle{
+  display:none; /* hidden on desktop */
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+/* When nav is shown in mobile it should not be full width; float centered below header */
+.links.open{
+  display: block !important;
+}
+
+/* Mobile-specific layout */
+@media (max-width: 900px){
+  header.topbar{
+    padding:12px 14px;
+    gap:8px;
+    align-items: flex-start;
+  }
+
+  /* show the menu toggle */
+  .menu-toggle{ display:block; }
+
+  /* hide horizontal links by default on mobile; show when .open */
+  nav.links{ display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+    background:var(--panel); color:var(--darkGreen); min-width:260px; width: min(920px, 92%);
+    border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); z-index:100; }
+
+  nav.links.open{ display:flex; flex-direction:column; gap:8px; }
+
+  nav.links a{ display:block; padding:10px 12px; border-radius:8px; background:transparent; color:var(--white); }
+  nav.links a.active{ text-decoration:none; }
+
+  /* make right button and language selector smaller */
+  #langSwitcher{ font-size:14px; padding:6px 8px; }
+  .right-btn a, .dropbtn{ padding:8px 14px; font-size:14px }
+
+  /* stack header elements when space is tight */
+  .brand{ flex: 0 0 auto }
+  .links{ order: 3 }
+  .right-btn{ order: 2 }
+  #langSwitcher{ order: 1 }
+}
+
+/* Responsive table -> card layout for small screens */
+@media (max-width: 700px){
+  .table{ width:100%; box-shadow:none; background:transparent; }
+  .table thead { display:none; }
+  .table tbody { display:block; }
+  .table tbody tr { display:block; margin: 0 0 12px; padding:12px; background:var(--panel); border-radius:12px; box-shadow:var(--shadow); }
+  .table tbody td{ display:flex; justify-content:space-between; padding:8px 6px; border-top:none; color:var(--white); }
+  .table tbody td + td { margin-top:6px; }
+  .table tbody td::before{ content: attr(data-label); display:inline-block; font-weight:800; color:var(--muted); margin-right:10px; }
+  .table tbody td .note{ display:block; font-size:13px; color:var(--muted); }
+}
+
+/* For very narrow screens allow horizontal scroll as fallback */
+@media (max-width: 420px){
+  .panel{ padding:12px; }
+  .table tbody tr{ padding:10px; }
+}
+
+/* ========================================================================
+   4. HERO SECTION
+   ======================================================================== */
+.hero{
+  display:grid; grid-template-columns:1.1fr .9fr;
+  gap:22px; align-items:center;
+  width:min(1180px, 96%);
+  margin:40px auto;
+}
+
+/* Título grande en hero */
+h1.big{
+  font-size: clamp(36px, 5vw, 64px); /* tamaño responsive */
+  font-weight:900;
+  margin:0 0 18px 0;
+}
+
+/* Botón principal */
+.btn {
+  display: inline-block;
+  background: var(--accent, #1b2143);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: var(--fuenteTamanoLg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease; /* transición suave */
+}
+.btn:hover {
+  background: var(--colorBase); /* tono más claro al hacer hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  color: var(--accent, --darkGreen); /* texto cambia de color */
+  font-weight: bold;
+}
+
+/* Ilustración en hero */
+.illus{
+  width:100%; height:380px;
+  border-radius:var(--radius-xl);
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+  color: var(--gray);
+}
+
+/* ========================================================================
+   5. TARJETAS (TILES)
+   ======================================================================== */
+.tiles{ 
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:26px;
+  width:min(1180px, 96%); margin: 10px auto 60px;
+}
+.tile{
+  background:var(--panel);
+  padding:22px;
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+}
+/* Medios de las tarjetas */
+.tile .media, .media-wide{
+  border-radius:var(--radius-xl);
+  height:220px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gray);
+}
+.tile .media img{
+ width: 100%;
+}
+/* Badges de las tarjetas */
+.badge{
+  background: var(--colorBase);
+  color:var(--darkBlue);
+  font-weight:800;
+  padding:6px 14px;
+  border-radius:999px;
+  display:inline-block;
+  margin-top:-10px;
+}
+.tile .badge {
+  position: absolute;
+  background: var(--colorBase);
+  color: var(--darkBlue);
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Título de tarjeta */
+.card-title{ 
+  font-size: var(--fuenteTamanoXl);
+  font-weight:900;
+  margin:12px 0 22px
+}
+/* Fecha de tarjeta */
+.card-date{opacity:.9;margin-top:12px}
+/* Acciones de tarjeta */
+.card-actions{margin:22px 0}
+
+/* ========================================================================
+   6. FORMULARIOS
+   ======================================================================== */
+form .btn-pill{
+  font-size: var(--fuenteTamanoLg); 
+}
+
+/* -- Parte del formulario de realizar una misión*/
+.form-evidencia { 
+  max-width: 480px;
+   margin: auto; text-align:
+    center; background: #fff; 
+    padding-top: 20px; border-radius: 
+    10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+.form-evidencia input[type="file"] { 
+  margin: 15px 0; 
+  padding: 12px; 
+  font-size: 16px; 
+  border: 2px solid #ccc; 
+  border-radius: 8px; }
+
+.nota-formatos { 
+  font-size: 14px; 
+  color: #666; }
+
+.file-label { 
+  display: inline-block; 
+  padding: 16px 24px; 
+  background: var(--darkGreen); 
+  color: white; 
+  border-radius: 30px; 
+  cursor: pointer; 
+  font-size: var(--fuenteTamanoLg);
+   font-weight: bold; 
+   transition: background 0.2s; }
+
+.file-label:hover { 
+  background: var(--colorBase); 
+  color:var(--darkGreen); }
+
+.file-input { display: none; }
+
+
+/* Estilo principal de los botones tipo pill */
+.btn-pill{
+  background: var(--darkGreen);
+  color: var(--white);
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-size: var(--fuenteTamanoLg);
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover para botones tipo pill */
+.btn-pill:hover {
+  background: var(--colorBase);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-3px); 
+  color: var(--accent, --darkGreen); 
+  font-weight: bold; 
+}
+
+/* ========================================================================
+   7. SECCIONES GENERALES / PANELES / TABLAS
+   ======================================================================== */
+.section{
+  width:min(1180px, 96%); margin:0 auto 60px;
+}
+.section h2{
+  font-size: var(--fuenteTamano3Xl); margin:0 0 8px; font-weight:900;
+}
+.lead{opacity:.85} /* texto destacado o introductorio */
+
+.grid-2{
+  display:grid; grid-template-columns: 1fr 1fr; gap:26px; /* grid de dos columnas */
+}
+
+/* Paneles genéricos */
+.panel{
+  background:var(--panel);
+  border-radius:var(--radius-xl);
+  padding:26px;
+  box-shadow:var(--shadow);
+}
+
+/* Etiquetas y campos de formulario */
+.label{font-size:var(--fuenteTamanoLg);font-weight:900;margin:8px 0 8px}
+.input, .select{
+  width:100%;
+  padding:14px 16px;
+  border:none;
+  border-radius:16px;
+  background:#e9eeeccc;
+  color: var(--darkGreen);
+  font-weight:600;
+  outline:none;
+  font-size: var(--fuenteTamanoLg);
+  font-family: var(--fuentePrincipal);
+}
+
+/* Mapas o contenedores grandes */
+.map{
+  height:560px;
+  background:var(--colorBase);
+  border-radius:var(--radius-xl);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gray);
+  box-shadow:var(--shadow);
+}
+
+/* Tablas */
+.table{
+  width:min(880px, 95%);
+  margin:20px auto;
+  background:var(--white);
+  color:var(--darkBlue);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.table thead th{
+  background:var(--panel);
+  color:var(--darkGreen); text-align:left; padding:16px;
+}
+.table tbody td{
+  padding:16px; border-top:1px solid rgba(0,0,0,.06);
+}
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 50%; 
+    overflow: hidden;
+    display: block;
+}
+.avatar {
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+/* ========================================================================
+   8. FOOTER
+   ======================================================================== */
+footer.site{
+  background:var(--panel);
+  margin-top:60px;
+  padding:18px 0 8px;
+  color:#0d2a26;
+}
+footer .inner{width:min(1180px, 96%);margin:0 auto}
+footer .row{display:flex; gap:20px; justify-content:space-between; align-items:center; flex-wrap:wrap}
+footer .quote{ text-align:right; font-weight:800; }
+
+/* Notas y listas */
+.note{opacity:.8}
+.note a{text-decoration:underline; font-size: var(--fuenteTamanoLg);}
+.note label{font-size: var(--fuenteTamanoLg);}
+.list{margin:0;padding:0; list-style:none; display:flex; gap:10px}
+.list a{text-decoration:underline }
+
+/* Paneles de moderador/admin */
+.flex-panels{
+  display:grid; grid-template-columns: 1fr 1fr; gap:40px;
+  width:min(1100px, 94%); margin:20px auto 60px;
+}
+.block{
+  background:var(--panel);
+  border-radius:30px;
+  padding:26px;
+  box-shadow:var(--shadow);
+}
+.block h3{margin:0 0 18px; font-size:26px}
+
+/* Items internos de los bloques */
+.item{
+  background:var(--card);
+  border-radius:999px;
+  padding:14px 20px;
+  display:flex; justify-content:space-between; align-items:center;
+  margin:12px 0;
+}
+.actions{display:flex; gap:14px; margin-top:16px}
+.small{padding:10px 18px; font-size:var(--fuenteTamanoSm); border-radius:999px; background:var(--accent); color:var(--white); font-weight:800}
+
+
+
+/* Detalle de noticias */
+.detalle-noticia p {
+  font-size: var(--fuenteTamanoXl);
+  line-height: 1.6;
+  color: var(--white); 
+}
+
+/* ========================================================================
+   8.1 FOOTER PRO
+   ======================================================================== */
+.footer-pro{
+  background: var(--panel); /* fondo de footer */
+  color: var(--white);
+  padding-top: 64px;
+  margin-top: 60px;
+}
+/* Contenedor grid del footer */
+.footer-pro__container{
+  width:min(1180px, 96%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 1.1fr 1.2fr .8fr 1.1fr;
+  gap:36px;
+}
+.footer-pro__col{min-width:0}
+
+/* Títulos con línea decorativa */
+.footer-pro__title{
+  color:#fff;
+  margin:0 0 18px;
+  font-weight:800;
+  font-size:18px;
+  position:relative;
+}
+.footer-pro__title::after{
+  content:"";
+  display:block;
+  width:46px; height:3px;
+  background:var(--accent); /* línea decorativa */
+  border-radius:2px;
+  margin-top:8px;
+}
+
+/* Texto e iconos sociales */
+.footer-pro__text{margin:0 0 18px; line-height:1.8}
+.footer-pro__social{
+  list-style:none; display:flex; gap:12px; padding:0; margin:6px 0 0;
+}
+.footer-pro__social a{
+  width:38px; height:38px; display:grid; place-items:center;
+  border-radius:50%; background:#151f2e; transition:transform .2s, background .2s;
+}
+.footer-pro__social a:hover{ transform:translateY(-2px); background:#202b3d }
+.footer-pro__social svg{ width:18px; height:18px; fill:#9fb0c9 }
+.footer-pro__social .is-twitter:hover svg{ fill:#1da1f2 }
+.footer-pro__social .is-facebook:hover svg{ fill:#1877f2 }
+.footer-pro__social .is-instagram:hover svg{ fill:#e1306c }
+
+/* Latest News en footer */
+.news-item{ display:flex; gap:14px; margin:14px 0 }
+.news-item__thumb{ flex:0 0 70px; height:60px; overflow:hidden; border-radius:10px }
+.news-item__thumb img{ width:100%; height:100%; object-fit:cover; display:block }
+.news-item__body{ min-width:0 }
+.news-item__title{
+  display:block; color:var(--white); font-weight:700; font-size:14px; line-height:1.4;
+}
+.news-item__title:hover{ text-decoration:underline }
+.news-item__meta{ font-size:12px; opacity:.8; display:flex; gap:8px; align-items:center; margin-top:6px }
+.news-item__meta a{ color: var(--white) }
+.news-item__meta a:hover{ text-decoration:underline }
+
+/* Links del footer */
+.footer-pro__links{ list-style:none; padding:0; margin:0 }
+.footer-pro__links li{ margin:10px 0 }
+.footer-pro__links a{ color:var(--white) }
+.footer-pro__links a:hover{ color:#ffffff; text-decoration:underline }
+
+/* Contacto en footer */
+.footer-pro__contact{ list-style:none; padding:0; margin:0; display:grid; gap:12px }
+.footer-pro__contact li{ display:flex; gap:12px; align-items:flex-start }
+.footer-pro__contact .ico{
+  flex:0 0 34px; height:34px; border-radius:50%; display:grid; place-items:center;
+  background:#151f2e;
+}
+.footer-pro__contact svg{ width:16px; height:16px; fill:#9fb0c9 }
+
+/* Franja inferior del footer */
+.footer-pro__bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  margin-top:36px;
+  padding:18px 0 26px;
+  text-align:center;
+}
+.footer-pro__bottom a{ color:#6a7cff }
+.footer-pro__bottom a:hover{ text-decoration:underline }
+
+.footer-pro__ods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.footer-pro__ods .footer-pro__title {
+  font-size: var(--fuenteTamanoSm);
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.ods-img {
+  max-width: 220px;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background-color: var(--white);
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+.ods-img:hover {
+  transform: scale(1.05);
+}
+
+
+/* ========================================================================
+   9. PANEL DE ADMIN / MODERADOR
+   ======================================================================== */
+.flex-panels { 
+  display:flex; 
+  gap:20px; 
+  flex-wrap:wrap; 
+}
+
+.block { 
+  flex:1 1 700px; 
+  background:var(--nav);
+  padding:16px; 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.05); 
+}
+
+.block h3 { margin-top:0; }
+
+.item { 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  padding:10px 12px;
+  border-bottom:1px solid #eee; 
+  cursor:default; }
+
+.item:hover { background:var(--bg); }
+
+.item .toggle { 
+  cursor:pointer; 
+  background:#e9eef8; 
+  padding:6px 10px; 
+  border-radius:6px;
+   user-select:none; 
+  }
+
+.detalle {
+  display:none; 
+  padding:12px;
+  background:var(--darkGreen); 
+  border-radius:6px; margin-bottom:8px; 
+  border:1px solid #f0f0f0;
+ }
+
+.actions { 
+  margin-top:10px; 
+  display:flex; 
+  gap:8px; 
+}
+
+.actions .small { 
+  display:inline-block; 
+  padding:6px 10px; 
+  border-radius:6px;
+   text-decoration:none; 
+   color:#fff; 
+  }
+
+.aceptar { background:#28a745; }
+
+.denegar { background:#dc3545; }
+
+.no-solicitudes { padding:12px; color:white; }
+
+  .crear {
+    background: var(--darkGreen);
+    font-size: var(--fuenteTamanoLg);
+  }
+
+  .editar {
+    background: #ce840dff;
+  }
+
+  .borrar {
+    background:   #920202ff;
+  } 
+
+  .no-solicitudes {
+    padding: 12px;
+    color: white;
+  }
+
+
+  .search-results {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;            /* ✅ centra horizontalmente */
+  gap: 30px;
+  max-width: 1100px;               /* ✅ ancho más moderado */
+  margin: 0 auto;                 /* ✅ centra el bloque principal */
+  
+
+}
+
+/* Encabezado */
+.search-header {
+  text-align: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-header h2 {
+  flex-grow: 1;
+  text-align: center; /* ✅ centra el título */
+  color: var(--colorBase);
+  font-size: var(--fuenteTamanoXl);
+  margin: 0;
+}
+
+
+.btn-back {
+  display: inline-block;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--colorBase);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.btn-back:hover {
+  background: var(--darkGreen);
+  color: var(--white);
+}
+
+/* Bloques de resultados */
+.result-block {
+  width: 100%;                     /* ✅ ocupa todo el ancho dentro del contenedor centrado */
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.result-block h3 {
+  color: var(--white);
+  border-bottom: 2px solid var(--muted);
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  font-size: var(--fuenteTamanoLg);
+}
+
+/* Tarjetas individuales */
+.result-item {
+  background-color: var(--darkGreen);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.result-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.result-item strong {
+  font-size: var(--fuenteTamanoLg);
+  color: var(--colorBase);
+}
+
+.result-item p {
+  color: var(--white);
+  line-height: 1.5;
+  margin: 6px 0;
+}
+
+.result-item img {
+  display: block;
+  max-width: 140px;
+  border-radius: var(--radius);
+  margin: 12px 0;
+  box-shadow: var(--shadow);
+}
+
+/* Mensajes */
+.no-results {
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Botones dentro de cada resultado */
+.actions {
+  margin-top: 10px;
+}
+
+.actions a.editar{
+  display: inline-block;
+  background-color: #ce840dff;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: var(--fuenteTamanoSm);
+  transition: background 0.2s ease;
+}
+
+
+.actions a.borrar{
+  display: inline-block;
+  background-color: #920202ff;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: var(--fuenteTamanoSm);
+  transition: background 0.2s ease;
+}
+
+.actions a:hover {
+  background: var(--accent);
+}
+
+.actions a.aceptar {
+  display: inline-block;
+  background-color: #2b6b5f;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: var(--fuenteTamanoSm);
+  transition: background 0.2s ease;
+}
+
+.actions a.denegar {
+  display: inline-block;
+  background-color: #920202ff;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: var(--fuenteTamanoSm);
+  transition: background 0.2s ease;
+}
+
+.actions a.aceptar:hover {
+  background: var(--accent);
+}
+
+.actions a.denegar:hover {
+  background: #c00000;
+}
+
+/* === Bloque de Búsqueda === */
+.search-block {
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 25px 30px;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+
+.search-title {
+  color: var(--white);
+  font-size: var(--fuenteTamanoLg);
+  margin-bottom: 18px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 16px;
+  border: 2px solid var(--muted);
+  border-radius: var(--radius);
+  font-size: var(--fuenteTamanoBase);
+  font-family: var(--fuentePrincipal);
+  background: var(--colorBase);
+  color: var(--darkGreen);
+  transition: all 0.25s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px rgba(36, 79, 70, 0.4);
+}
+
+.search-btn {
+  padding: 12px 22px;
+  background: var(--accent);
+  color: var(--colorBase);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: var(--fuenteTamanoBase);
+  transition: all 0.25s ease;
+}
+
+.search-btn:hover {
+  background: var(--card);
+  color: var(--darkGreen);
+  transform: translateY(-1px);
+}
+
+/* ========================================================================
+   10. RESPONSIVE DESIGN
+   ======================================================================== */
+
+
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .flex-panels{grid-template-columns:1fr}
+}
+
+/* ====== Responsive footer ====== */
+@media (max-width: 1000px){
+  .footer-pro__container{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px){
+  .footer-pro__container{ grid-template-columns: 1fr; }
+  .footer-pro{ padding-top: 52px; }
+}
