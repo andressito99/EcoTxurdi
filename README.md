@@ -202,7 +202,7 @@ Notas de seguridad y producción:
 
 ## Probar localmente
 
-1. Arranca Laragon.
+1. Arranca Laragon o XAMPP.
 2. Asegúrate de haber importado la base de datos y actualizado `config.php`.
 3. Accede a la URL local. Prueba registro, creación/realización de misiones, y flujo de administración.
 
